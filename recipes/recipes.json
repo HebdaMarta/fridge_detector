@@ -1,0 +1,152 @@
+[
+  {
+    "title": "Scrambled Eggs",
+    "ingredients": ["egg", "butter"],
+    "recipe": "Beat eggs, melt butter in a pan and cook until creamy."
+  },
+  {
+    "title": "Cheese Omelette",
+    "ingredients": ["egg", "cheese"],
+    "recipe": "Mix eggs with grated cheese and fry."
+  },
+  {
+    "title": "Tomato Omelette",
+    "ingredients": ["egg", "tomato"],
+    "recipe": "Add chopped tomato to beaten eggs and fry."
+  },
+  {
+    "title": "Ham and Cheese Toast",
+    "ingredients": ["bread", "ham", "cheese"],
+    "recipe": "Place ham and cheese between bread slices and toast."
+  },
+  {
+    "title": "Grilled Cheese Sandwich",
+    "ingredients": ["bread", "cheese", "butter"],
+    "recipe": "Butter bread, add cheese and grill."
+  },
+  {
+    "title": "Pancakes",
+    "ingredients": ["milk", "egg", "flour"],
+    "recipe": "Mix ingredients and fry thin pancakes."
+  },
+  {
+    "title": "French Toast",
+    "ingredients": ["bread", "egg", "milk"],
+    "recipe": "Dip bread in egg mixture and fry."
+  },
+  {
+    "title": "Caprese Salad",
+    "ingredients": ["tomato", "mozzarella"],
+    "recipe": "Slice ingredients and arrange on a plate."
+  },
+  {
+    "title": "Greek Salad",
+    "ingredients": ["tomato", "cucumber", "cheese"],
+    "recipe": "Combine vegetables and cheese."
+  },
+  {
+    "title": "Chicken Salad",
+    "ingredients": ["chicken", "lettuce", "tomato"],
+    "recipe": "Mix cooked chicken with vegetables."
+  },
+  {
+    "title": "Chicken Wrap",
+    "ingredients": ["chicken", "tortilla", "lettuce"],
+    "recipe": "Wrap chicken and vegetables in tortilla."
+  },
+  {
+    "title": "Chicken Rice Bowl",
+    "ingredients": ["chicken", "rice"],
+    "recipe": "Serve grilled chicken over rice."
+  },
+  {
+    "title": "Fried Rice",
+    "ingredients": ["rice", "egg"],
+    "recipe": "Stir fry rice and egg together."
+  },
+  {
+    "title": "Vegetable Stir Fry",
+    "ingredients": ["broccoli", "carrot", "onion"],
+    "recipe": "Cook vegetables in a hot pan."
+  },
+  {
+    "title": "Broccoli Soup",
+    "ingredients": ["broccoli", "milk"],
+    "recipe": "Boil broccoli and blend with milk."
+  },
+  {
+    "title": "Potato Soup",
+    "ingredients": ["potato", "onion"],
+    "recipe": "Cook potatoes and onions until soft."
+  },
+  {
+    "title": "Mashed Potatoes",
+    "ingredients": ["potato", "butter", "milk"],
+    "recipe": "Mash cooked potatoes with butter and milk."
+  },
+  {
+    "title": "Baked Potatoes",
+    "ingredients": ["potato"],
+    "recipe": "Bake potatoes until crispy."
+  },
+  {
+    "title": "Fruit Salad",
+    "ingredients": ["apple", "banana", "orange"],
+    "recipe": "Cut fruit and mix."
+  },
+  {
+    "title": "Banana Smoothie",
+    "ingredients": ["banana", "milk"],
+    "recipe": "Blend banana with milk."
+  },
+  {
+    "title": "Apple Yogurt Bowl",
+    "ingredients": ["apple", "yogurt"],
+    "recipe": "Mix diced apple with yogurt."
+  },
+  {
+    "title": "Berry Yogurt",
+    "ingredients": ["yogurt", "berries"],
+    "recipe": "Mix berries into yogurt."
+  },
+  {
+    "title": "Tuna Sandwich",
+    "ingredients": ["bread", "tuna"],
+    "recipe": "Fill bread with tuna."
+  },
+  {
+    "title": "Tuna Salad",
+    "ingredients": ["tuna", "lettuce"],
+    "recipe": "Mix tuna with lettuce."
+  },
+  {
+    "title": "Pasta Carbonara",
+    "ingredients": ["pasta", "egg", "cheese"],
+    "recipe": "Combine cooked pasta with egg and cheese."
+  },
+  {
+    "title": "Mac and Cheese",
+    "ingredients": ["pasta", "cheese", "milk"],
+    "recipe": "Cook pasta and add cheese sauce."
+  },
+  {
+    "title": "Vegetable Pasta",
+    "ingredients": ["pasta", "tomato", "onion"],
+    "recipe": "Cook pasta with vegetables."
+  },
+  {
+    "title": "Chicken Pasta",
+    "ingredients": ["pasta", "chicken"],
+    "recipe": "Mix cooked chicken with pasta."
+  },
+  {
+    "title": "Cheese Quesadilla",
+    "ingredients": ["tortilla", "cheese"],
+    "recipe": "Fill tortilla with cheese and grill."
+  },
+  {
+    "title": "Breakfast Burrito",
+    "ingredients": ["egg", "tortilla", "cheese"],
+    "recipe": "Wrap eggs and cheese in tortilla."
+  }
+]

@@ -1,0 +1,22 @@
+[project]
+name = "fridge-chef-ai"
+version = "0.1.0"
+requires-python = ">=3.12"
+
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "streamlit",
+    "pillow",
+    "chromadb",
+    "sentence-transformers",
+    "requests",
+    "python-multipart",
+    "transformers==4.48.3",
+    "torch",
+    "accelerate",
+    "pillow",
+    "timm>=1.0.27",
+    "einops>=0.8.2",
+    "torchvision>=0.27.0",
+]
