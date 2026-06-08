@@ -5,19 +5,20 @@ from fastapi import (
     Form
 )
 
-from backend.detector import detect_products
-from backend.rag import search_recipe
-from backend.llm import generate_recipe
 from pathlib import Path
+
+from backend.detector import detect_products
 from backend.helper import split_products
 
 app = FastAPI()
+
 
 @app.post("/recipe")
 async def recipe(
     image: UploadFile = File(...),
     preference: str = Form(...)
 ):
+
     path = f"data/uploads/{image.filename}"
 
     Path("data/uploads").mkdir(
@@ -30,7 +31,21 @@ async def recipe(
 
     inventory = detect_products(path)
 
+    print("\nINVENTORY:")
     print(inventory)
+    print(type(inventory))
+
+    if not isinstance(inventory, dict):
+        return {
+            "error": "Inventory is not a dict",
+            "inventory": str(inventory)
+        }
+
+    if "products" not in inventory:
+        return {
+            "error": "Missing products key",
+            "inventory": inventory
+        }
 
     confirmed_products, possible_products = split_products(
         inventory["products"]
