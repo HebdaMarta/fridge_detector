@@ -1,6 +1,12 @@
 import streamlit as st
 import requests
 
+with open("frontend/style.css") as f:
+    st.markdown(
+        f"<style>{f.read()}</style>",
+        unsafe_allow_html=True
+    )
+
 st.set_page_config(
     page_title="AI Fridge Chef",
     page_icon="🥗",
@@ -351,9 +357,14 @@ if "inventory" in st.session_state:
 
         else:
 
-            recipes = response.json()
+            st.session_state["recipes"] = response.json()
 
-            st.session_state["recipes"] = recipes
+            st.session_state.pop(
+                "chosen_recipe",
+                None
+            )
+
+            st.rerun()
 
     if "recipes" in st.session_state:
 
@@ -368,12 +379,35 @@ if "inventory" in st.session_state:
         cols = st.columns(3)
 
         for idx, recipe in enumerate(recipes):
+
             with cols[idx]:
+
+                selected = (
+                        "chosen_recipe" in st.session_state
+                        and
+                        st.session_state["chosen_recipe"]["title"]
+                        == recipe["title"]
+                )
+
+                card_class = "recipe-card"
+
+                if "chosen_recipe" in st.session_state:
+
+                    if selected:
+
+                        card_class += " recipe-card-selected"
+
+                    else:
+
+                        card_class += " recipe-card-faded"
+
                 st.markdown(
                     f"""
-                    <div class="recipe-card">
+                    <div class="{card_class}">
 
-                    <h3>🍽 {recipe["title"]}</h3>
+                    <h3>
+                    🍽 {recipe["title"]}
+                    </h3>
 
                     <div class="recipe-time">
                     ⏱ {recipe["time"]}
@@ -387,3 +421,45 @@ if "inventory" in st.session_state:
                     """,
                     unsafe_allow_html=True
                 )
+
+                if st.button(
+                        "✨ Select",
+                        key=f"recipe_{idx}"
+                ):
+                    st.session_state["chosen_recipe"] = recipe
+                    st.rerun()
+
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        c1, c2, c3 = st.columns(
+            [2, 1, 2]
+        )
+
+        with c2:
+            st.markdown(
+                """
+                <center>
+                <h3>
+                🤔 None of these recipes look good?
+                </h3>
+                </center>
+                """,
+                unsafe_allow_html=True
+            )
+
+            if st.button(
+                    "✨ Generate 3 New Recipes",
+                    use_container_width=True
+            ):
+                st.session_state.pop(
+                    "recipes",
+                    None
+                )
+
+                st.session_state.pop(
+                    "chosen_recipe",
+                    None
+                )
+
+                st.rerun()
