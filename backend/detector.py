@@ -45,7 +45,11 @@ Return JSON only.
         .replace("```", "")
         .strip()
     )
-
     inventory = json.loads(raw_response)
+
+    if "fridge_contents" in inventory:
+        inventory = {
+            "products": inventory["fridge_contents"]
+        }
 
     return inventory

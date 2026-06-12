@@ -4,9 +4,10 @@ from fastapi import (
     File,
     Form
 )
-
+from backend.schemas import RecipeGenerationRequest
+from backend.rag import search_recipe
+from backend.llm import generate_recipe
 from pathlib import Path
-
 from backend.detector import detect_products
 from backend.helper import split_products
 
@@ -16,9 +17,8 @@ app = FastAPI()
 @app.post("/recipe")
 async def recipe(
     image: UploadFile = File(...),
-    preference: str = Form(...)
+    preference: str = Form(default="")
 ):
-
     path = f"data/uploads/{image.filename}"
 
     Path("data/uploads").mkdir(
@@ -47,11 +47,35 @@ async def recipe(
             "inventory": inventory
         }
 
+    products = (
+            inventory.get("products")
+            or inventory.get("fridge_contents")
+            or []
+    )
+
     confirmed_products, possible_products = split_products(
-        inventory["products"]
+        products
     )
 
     return {
         "confirmed_products": confirmed_products,
         "possible_products": possible_products
     }
+
+@app.post("/generate_recipes")
+async def generate_recipes(
+    request: RecipeGenerationRequest
+):
+
+    recipes = search_recipe(
+        request.products,
+        request.preference
+    )
+
+    answer = generate_recipe(
+        request.products,
+        recipes,
+        request.preference
+    )
+
+    return answer

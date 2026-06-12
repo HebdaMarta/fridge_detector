@@ -5,7 +5,11 @@ def split_products(products):
 
     for product in products:
 
-        if product["confidence"] >= 80:
+        confidence = int(
+            product["confidence"]
+        )
+
+        if confidence >= 80:
             confirmed.append(product)
 
         else:

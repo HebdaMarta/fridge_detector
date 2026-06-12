@@ -1,4 +1,6 @@
 from pydantic import BaseModel
 
-class RecipeRequest(BaseModel):
+
+class RecipeGenerationRequest(BaseModel):
+    products: list[str]
     preference: str

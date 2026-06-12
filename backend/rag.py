@@ -20,10 +20,7 @@ collection = client.get_or_create_collection(
     "recipes"
 )
 
-def search_recipe(
-        products,
-        preference
-):
+def search_recipe(products, preference):
 
     query = (
         " ".join(products)
@@ -40,4 +37,4 @@ def search_recipe(
         n_results=3
     )
 
-    return result
+    return result["documents"][0]
