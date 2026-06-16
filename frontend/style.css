@@ -1,0 +1,55 @@
+.recipe-card {
+    background:white;
+    border-radius:24px;
+    padding:25px;
+    min-height:260px;
+
+    border:1px solid #e5e7eb;
+
+    transition:all .3s ease;
+}
+
+.recipe-card-selected {
+
+    background:
+    linear-gradient(
+        135deg,
+        #dcfce7,
+        #bbf7d0
+    );
+
+    border:3px solid #22c55e;
+
+    transform:scale(1.04);
+
+    box-shadow:
+    0 20px 50px rgba(
+        34,
+        197,
+        94,
+        0.25
+    );
+}
+
+.recipe-card-faded {
+
+    opacity:0.45;
+}
+
+.stButton button {
+
+    background:
+    linear-gradient(
+        135deg,
+        #3b82f6,
+        #8b5cf6
+    ) !important;
+
+    color:white !important;
+
+    border:none !important;
+
+    font-weight:600;
+
+    border-radius:12px;
+}
