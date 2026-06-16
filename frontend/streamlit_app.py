@@ -403,3 +403,46 @@ if "inventory" in st.session_state:
                 ):
                     st.session_state["chosen_recipe"] = recipe
                     st.rerun()
+
+            st.markdown("<br>", unsafe_allow_html=True)
+
+            c1, c2, c3 = st.columns(
+                [2, 1, 2]
+            )
+
+        with c2:
+            st.markdown(
+                """
+                <center>
+                <h3>🤔 None of these recipes look good?</h3>
+                <p>Tell the AI what you'd prefer instead:</p>
+                </center>
+                """,
+                unsafe_allow_html=True
+            )
+
+            new_priority = st.text_input(
+                "",
+                placeholder="e.g. Make it even healthier or more spicy...",
+                key="new_priority_input"
+            )
+
+            if st.button(
+                    "✨ Generate 3 New Recipes",
+                    use_container_width=True
+            ):
+                custom_request = st.session_state.get("new_priority_input", "")
+                with st.spinner():
+                    response = requests.post(
+                        "http://localhost:8000/generate_recipes",
+                        json={
+                            "products": st.session_state.get("selected_products", []),
+                            "preference": st.session_state.get("preference", ""),
+                            "custom_request": custom_request
+                        }
+                    )
+                if response.status_code == 200:
+                    data = response.json()
+                    st.session_state["recipes"] = data
+                    st.session_state.pop("chosen_recipe", None)
+                    st.rerun()

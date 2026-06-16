@@ -43,9 +43,7 @@ with Session(engine) as session:
         nutrients = item.get("nutrients", {})
 
         kcal_val = nutrients.get("kcal")
-        kcal_int = parse_nutrient(nutrients.get("kcal"))
-        if kcal_int is not None:
-            kcal_int = int(kcal_int)
+        kcal_int = int(kcal_val) if kcal_val and str(kcal_val).isdigit() else None
 
         protein_val = parse_nutrient(nutrients.get("protein"))
         fat_val = parse_nutrient(nutrients.get("fat"))
