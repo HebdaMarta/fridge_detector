@@ -33,7 +33,7 @@ def parse_nutrient(value: str) -> float | None:
         return None
 #ładuję jsona
 with open(JSON_PATH, "r", encoding="utf-8") as f:
-    recipes_data = json.load(f)[:250]
+    recipes_data = json.load(f)[:1000]
 print(f"wczytano JSON")
 
 with Session(engine) as session:
@@ -43,7 +43,9 @@ with Session(engine) as session:
         nutrients = item.get("nutrients", {})
 
         kcal_val = nutrients.get("kcal")
-        kcal_int = int(kcal_val) if kcal_val and str(kcal_val).isdigit() else None
+        kcal_int = parse_nutrient(nutrients.get("kcal"))
+        if kcal_int is not None:
+            kcal_int = int(kcal_int)
 
         protein_val = parse_nutrient(nutrients.get("protein"))
         fat_val = parse_nutrient(nutrients.get("fat"))

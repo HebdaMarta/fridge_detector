@@ -41,7 +41,7 @@ async def recipe(
 async def generate_recipes(request: RecipeGenerationRequest):
     try:
         ingredients_str = ", ".join(request.products)
-        combined_query_text = f"{request.preference}. Mam w lodówce: {ingredients_str}."
+        combined_query_text = f"PRIORITY: {request.custom_request} Moje preferencje: {request.preference}. Mam w lodówce: {ingredients_str}."
 
         print(f"[API] Szukam przepisów dla frazy: '{combined_query_text}'")
         query_embedding = model_embed.encode(combined_query_text).tolist()

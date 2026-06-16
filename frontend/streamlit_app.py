@@ -1,6 +1,12 @@
 import streamlit as st
 import requests
 
+with open("frontend/style.css") as f:
+    st.markdown(
+        f"<style>{f.read()}</style>",
+        unsafe_allow_html=True
+    )
+
 st.set_page_config(
     page_title="AI Fridge Chef",
     page_icon="🥗",
@@ -59,7 +65,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-
 st.markdown("""
 <div style="
 padding:30px;
@@ -113,11 +118,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-
 inventory = st.session_state.get("inventory")
 
 if inventory is not None:
-
     confirmed_products = inventory.get(
         "confirmed_products",
         []
@@ -142,7 +145,6 @@ else:
 
     image = st.session_state["uploaded_image"]
 
-
 if st.button("🔍 Analyze Fridge"):
 
     if image is None:
@@ -154,7 +156,7 @@ if st.button("🔍 Analyze Fridge"):
     else:
 
         with st.spinner(
-            "Analyzing fridge..."
+                "Analyzing fridge..."
         ):
 
             response = requests.post(
@@ -190,7 +192,6 @@ if st.button("🔍 Analyze Fridge"):
 
             st.rerun()
 
-
 if "inventory" in st.session_state:
 
     inventory = st.session_state["inventory"]
@@ -215,11 +216,9 @@ if "inventory" in st.session_state:
 
     selected_products = []
 
-
     with left:
 
         if image is not None:
-
             st.markdown(
                 "## 📸 Uploaded Fridge"
             )
@@ -228,7 +227,6 @@ if "inventory" in st.session_state:
                 image,
                 width="stretch"
             )
-
 
     with right:
 
@@ -250,7 +248,6 @@ if "inventory" in st.session_state:
             )
 
             if checked:
-
                 selected_products.append(
                     product["name"]
                 )
@@ -273,7 +270,6 @@ if "inventory" in st.session_state:
             )
 
             if checked:
-
                 selected_products.append(
                     product["name"]
                 )
@@ -304,7 +300,7 @@ if "inventory" in st.session_state:
     st.markdown(
         """
         ## 🍽 Recipe Preferences
-    
+
         Tell the AI what kind of meal you want.
         """
     )
@@ -351,9 +347,14 @@ if "inventory" in st.session_state:
 
         else:
 
-            recipes = response.json()
+            st.session_state["recipes"] = response.json()
 
-            st.session_state["recipes"] = recipes
+            st.session_state.pop(
+                "chosen_recipe",
+                None
+            )
+
+            st.rerun()
 
     if "recipes" in st.session_state:
 
@@ -368,22 +369,37 @@ if "inventory" in st.session_state:
         cols = st.columns(3)
 
         for idx, recipe in enumerate(recipes):
+
             with cols[idx]:
+
+                selected = (
+                        "chosen_recipe" in st.session_state
+                        and
+                        st.session_state["chosen_recipe"]["title"]
+                        == recipe["title"]
+                )
+
+                card_class = "recipe-card"
+
+                if "chosen_recipe" in st.session_state:
+                    if selected:
+                        card_class += " recipe-card-selected"
+                    else:
+                        card_class += " recipe-card-faded"
+
                 st.markdown(
-                    f"""
-                    <div class="recipe-card">
-
-                    <h3>🍽 {recipe["title"]}</h3>
-
-                    <div class="recipe-time">
-                    ⏱ {recipe["time"]}
-                    </div>
-
-                    <br><br>
-
-                    {recipe["description"]}
-
-                    </div>
-                    """,
+                    f"""<div class="{card_class}">
+        <h3 style="margin-top: 0;">🍽 {recipe["title"]}</h3>
+        <div class="recipe-time">⏱ {recipe["time"]}</div>
+        <br><br>
+        {recipe["description"]}
+        </div>""",
                     unsafe_allow_html=True
                 )
+
+                if st.button(
+                        "✨ Select",
+                        key=f"recipe_{idx}"
+                ):
+                    st.session_state["chosen_recipe"] = recipe
+                    st.rerun()

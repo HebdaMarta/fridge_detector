@@ -5,7 +5,6 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import JSONB
 
 
-# Create the base class for the table definition
 class Base(DeclarativeBase):
     __abstract__ = True
 
