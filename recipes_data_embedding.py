@@ -1,13 +1,13 @@
 import json
 import os
-from sql_engine_embedding import engine
-from main_embedding import Base, Recipes
+from backend.sql_engine_embedding import engine
+from backend.main_embedding import Base, Recipes
 from sentence_transformers import SentenceTransformer
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 
 
-JSON_PATH = os.path.join('data', 'recipes.json')
+JSON_PATH = os.path.join('', 'data/recipes.json')
 if not os.path.exists(JSON_PATH):
     print(f"Nie ma pliku json w ścieżce: {JSON_PATH}")
     exit(1)
@@ -74,18 +74,11 @@ with Session(engine) as session:
 
         recipe = Recipes(
             id=item.get("id"),
-            #url=item.get("url"),
-            #image=item.get("image"),
             name=item.get("name"),
             description=item.get("description"),
-            #author=item.get("author"),
-            #ratings=item.get("rattings", 0),
             ingredients=ingredients_list,
             steps=steps_list,
             kcal=kcal_int,
-            #protein=protein_val,
-            #fat=fat_val,
-            #carbs=carbs_val,
             difficulty=item.get("difficult"),
             subcategory=item.get("subcategory"),
             dish_type=item.get("dish_type"),
